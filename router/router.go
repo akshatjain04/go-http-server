@@ -1,4 +1,4 @@
-package main
+package router
 
 import (
 	"encoding/json"
@@ -17,14 +17,14 @@ func NewRouter(db *sqlx.DB) *Router {
 	}
 }
 
-func (r *Router) ping(w http.ResponseWriter, req *http.Request) {
+func (r *Router) Ping(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	if _, err := w.Write([]byte("pong")); err != nil {
 		panic(err)
 	}
 }
 
-func (r *Router) dbNonce(w http.ResponseWriter, req *http.Request) {
+func (r *Router) DBNonce(w http.ResponseWriter, req *http.Request) {
 	var (
 		code      int
 		respBytes = make([]byte, 0)

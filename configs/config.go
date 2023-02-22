@@ -3,6 +3,7 @@ package configs
 import (
 	"fmt"
 	"github.com/caarlos0/env/v6"
+	"github.com/joho/godotenv"
 )
 
 type DBConfigs struct {
@@ -14,6 +15,10 @@ type DBConfigs struct {
 }
 
 func ParseDBConfigs() (DBConfigs, error) {
+	if err := godotenv.Load(); err != nil {
+		return DBConfigs{}, err
+	}
+
 	var configs DBConfigs
 	err := env.Parse(&configs)
 
